@@ -24,13 +24,8 @@ class ElementSeed extends HTMLElement {
   }
 
   _render() {
-    var root;
-    if ('createShadowRoot' in HTMLElement.prototype) {
-      root = this.shadowRoot;
-      if (!root) root = this.createShadowRoot();
-    } else {
-      root = this;
-    }
+    let root = this.shadowRoot;
+    if (!root) root = this.createShadowRoot();
     root.innerHTML = `
       <style>
         :host {
