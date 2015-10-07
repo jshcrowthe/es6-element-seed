@@ -8,9 +8,9 @@
 // HTMLElement to be an `function` whereas in safari
 // it's a `object`)
 if (typeof HTMLElement !== 'function') {
-    var _HTMLElement = function(){};
-    _HTMLElement.prototype = HTMLElement.prototype;
-    HTMLElement = _HTMLElement;
+  var _HTMLElement = function(){};
+  _HTMLElement.prototype = HTMLElement.prototype;
+  HTMLElement = _HTMLElement;
 }
 
 class ElementSeed extends HTMLElement {
