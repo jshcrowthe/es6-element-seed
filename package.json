@@ -25,6 +25,8 @@
   "homepage": "https://github.com/jshcrowthe/es6-element-seed",
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-babel": "^5.2.1"
+    "gulp-babel": "^5.2.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-webserver": "^0.9.1"
   }
 }
