@@ -1,0 +1,30 @@
+{
+  "name": "es6-element-seed",
+  "version": "0.1.0",
+  "description": "Boilerplate for creating WebComponents with raw ES6",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jshcrowthe/es6-element-seed.git"
+  },
+  "keywords": [
+    "ES6",
+    "WebComponents",
+    "Babel",
+    "Boilerplate",
+    "seed"
+  ],
+  "author": "Josh Crowther <jshcrowthe@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jshcrowthe/es6-element-seed/issues"
+  },
+  "homepage": "https://github.com/jshcrowthe/es6-element-seed",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-babel": "^5.2.1"
+  }
+}
