@@ -2,6 +2,17 @@
  * Create an ElementSeed class that extends HTMLElement
  * this will represent the WebComponent
  */
+
+// This is a quick shim to allow Safari to properly
+// extend the HTMLElement (by default babel assumes
+// HTMLElement to be an `function` whereas in safari
+// it's a `object`)
+if (typeof HTMLElement !== 'function') {
+    var _HTMLElement = function(){};
+    _HTMLElement.prototype = HTMLElement.prototype;
+    HTMLElement = _HTMLElement;
+}
+
 class ElementSeed extends HTMLElement {
 
   get name() {
@@ -9,7 +20,7 @@ class ElementSeed extends HTMLElement {
   }
 
   set name(val) {
-    return this.setAttribute('name', JSON.stringify(val));
+    return this.setAttribute('name', val);
   }
 
   _render() {
