@@ -2,10 +2,15 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var notify = require('gulp-notify');
 var webserver = require('gulp-webserver');
+var closure = require('gulp-jsclosure');
 
 gulp.task('transpile', function() {
   return gulp.src('./src/**/*.es6.js')
             .pipe(babel())
+            .pipe(closure([
+              'HTMLElement',
+              'document'
+            ]))
             .pipe(gulp.dest('./dist'))
             .pipe(notify({
               title: 'Task: `transpile`',
