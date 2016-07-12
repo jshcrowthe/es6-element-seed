@@ -1,0 +1,69 @@
+<template>
+  <style>
+    /**
+     * Default Styling for our `element-seed` 
+     * custom element
+     */
+    :host {
+      display: block;
+    };
+    p { 
+      color: green; 
+    }
+  </style>
+  <h1>Hello World</h1>
+  <p>I'm in Shadow DOM. My markup was stamped from a &lt;template&gt;.</p>
+</template>
+
+<script>
+  (function(document, HTMLElement) {
+    // A thing to reference the template tag in the current document when HTML imported
+    var template = (function(document) {
+      var script = document._currentScript || document.currentScript;
+      return script.ownerDocument.querySelector('template');
+    })(document);
+    
+    /**
+     * Create an `ElementSeed` class that extends
+     * `HTMLElement` This is the same as doing
+     * the following:
+     *
+     * ```
+     * var proto = Object.create(HTMLElement.prototype)
+     * proto.createdCallback = function() {}
+     * ...
+     * document.registerElement('element-seed', {
+     *   prototype: proto
+     * })
+     * ```
+     */
+    class ElementSeed extends HTMLElement {
+      /**
+       * The following 4 lifecycle callbacks are available
+       * use them as need be. Typically all DOM setup type things
+       * happen in the `createdCallback`
+       */
+      // Use `createdCallback` instead of constructor to init a custom element.
+      createdCallback() {
+        // Get template clone
+        var clone = document.importNode(template.content, true);
+
+        // Create a shadowRoot and append the template
+        this.createShadowRoot().appendChild(clone);
+      }
+      // attachedCallback() {}
+      // detachedCallback() {}
+      // attributeChangedCallback() {}
+    }
+
+    /**
+     * If I wanted to make a type extension element, before I register the element,
+     * I could do the following:
+     * ```
+     * ElementSeed.extends = 'button';
+     * ```
+     */
+
+    document.registerElement('element-seed', ElementSeed);
+  })(document, HTMLElement)
+</script>
