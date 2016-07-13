@@ -35,9 +35,6 @@
   }
 
 </style>
-<template>
-  <content></content>
-</template>
 
 <script>
   (function(document, HTMLButtonElement) {
@@ -47,10 +44,6 @@
      * (Contains a fix for the `document.currentScript`/`document._currentScript`
      * https://github.com/webcomponents/webcomponentsjs#html-imports-documentcurrentscript-doesnt-work-as-expected-)
      */
-    var template = (function(document) {
-      var script = document._currentScript || document.currentScript;
-      return script.ownerDocument.querySelector('template');
-    })(document);
     
     /**
      * Create an `FancyButton` class that extends
@@ -68,26 +61,27 @@
      * ```
      */
     class FancyButton extends HTMLButtonElement {
+      constructor() {
+        super();
+      }
       /**
        * The following 4 lifecycle callbacks are available
        * use them as need be. Typically all DOM setup type things
        * happen in the `createdCallback`
        */
-      // Use `createdCallback` instead of constructor to init a custom element.
-      createdCallback() {
-        // Get template clone
-        var clone = document.importNode(template.content, true);
-
-        // Create a shadowRoot and append the template
-        this.createShadowRoot().appendChild(clone);
-      }
+      
+      /**
+       * You can add event listeners and other functions as needed
+       * for the element, it'll be great!
+       */
+      
+      // createdCallback() {}
       // attachedCallback() {}
       // detachedCallback() {}
       // attributeChangedCallback() {}
     }
 
-    FancyButton.extends = 'button';
-    document.registerElement('fancy-button', FancyButton);
+    document.registerElement('fancy-button', FancyButton, { extends: 'button' });
 
   })(document, HTMLButtonElement)
 </script>
