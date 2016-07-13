@@ -11,13 +11,18 @@
       color: green; 
     }
   </style>
-  <h1>Hello World</h1>
+  <h2>Hello World</h2>
   <p>I'm in Shadow DOM. My markup was stamped from a &lt;template&gt;.</p>
 </template>
 
 <script>
   (function(document, HTMLElement) {
-    // A thing to reference the template tag in the current document when HTML imported
+
+    /** 
+     * Reference the template tag in this current document when HTML imported
+     * (Contains a fix for the `document.currentScript`/`document._currentScript`
+     * https://github.com/webcomponents/webcomponentsjs#html-imports-documentcurrentscript-doesnt-work-as-expected-)
+     */
     var template = (function(document) {
       var script = document._currentScript || document.currentScript;
       return script.ownerDocument.querySelector('template');
@@ -55,14 +60,6 @@
       // detachedCallback() {}
       // attributeChangedCallback() {}
     }
-
-    /**
-     * If I wanted to make a type extension element, before I register the element,
-     * I could do the following:
-     * ```
-     * ElementSeed.extends = 'button';
-     * ```
-     */
 
     document.registerElement('element-seed', ElementSeed);
   })(document, HTMLElement)

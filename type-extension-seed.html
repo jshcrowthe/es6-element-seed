@@ -1,0 +1,92 @@
+<template>
+  <style>
+    /**
+     * Default Styling for our `element-seed` 
+     * custom element
+     */
+    :host {
+      position: relative;
+      box-sizing: border-box;
+      min-width: 5.14em;
+      margin: 0 0.29em;
+      background: transparent;
+      border: 1px solid #e0e0e0;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: transparent;
+      font: inherit;
+      text-transform: uppercase;
+      outline-width: 0;
+      border-radius: 3px;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      cursor: pointer;
+      z-index: 0;
+      padding: 0.7em 0.57em;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 
+                  0 1px 5px 0 rgba(0, 0, 0, 0.12),
+                  0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+    :host(:active) {
+      box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+                  0 1px 8px 0 rgba(0, 0, 0, 0.12),
+                  0 3px 3px -2px rgba(0, 0, 0, 0.4);
+    }
+
+  </style>
+  <content></content>
+</template>
+
+<script>
+  (function(document, HTMLButtonElement) {
+
+    /** 
+     * Reference the template tag in this current document when HTML imported
+     * (Contains a fix for the `document.currentScript`/`document._currentScript`
+     * https://github.com/webcomponents/webcomponentsjs#html-imports-documentcurrentscript-doesnt-work-as-expected-)
+     */
+    var template = (function(document) {
+      var script = document._currentScript || document.currentScript;
+      return script.ownerDocument.querySelector('template');
+    })(document);
+    
+    /**
+     * Create an `FancyButton` class that extends
+     * `HTMLButtonElement` This is the same as doing
+     * the following:
+     *
+     * ```
+     * var proto = Object.create(HTMLButtonElement.prototype)
+     * proto.createdCallback = function() {}
+     * ...
+     * document.registerElement('element-seed', {
+     *   extends: 'button',
+     *   prototype: proto
+     * })
+     * ```
+     */
+    class FancyButton extends HTMLButtonElement {
+      /**
+       * The following 4 lifecycle callbacks are available
+       * use them as need be. Typically all DOM setup type things
+       * happen in the `createdCallback`
+       */
+      // Use `createdCallback` instead of constructor to init a custom element.
+      createdCallback() {
+        // Get template clone
+        var clone = document.importNode(template.content, true);
+
+        // Create a shadowRoot and append the template
+        this.createShadowRoot().appendChild(clone);
+      }
+      // attachedCallback() {}
+      // detachedCallback() {}
+      // attributeChangedCallback() {}
+    }
+
+    FancyButton.extends = 'button';
+    document.registerElement('fancy-button', FancyButton);
+
+  })(document, HTMLButtonElement)
+</script>
